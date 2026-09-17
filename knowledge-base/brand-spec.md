@@ -28,23 +28,29 @@ This file is the canonical record of brand and content facts for the West Point 
 
 ---
 
-## Brand Colors (approximate — read visually from logo/business card images, not color-picked from a source file)
+## Brand Colors (confirmed — extracted programmatically from the client-supplied logo files, 2026-09-17)
 
-| Token | Hex (approx.) | Usage |
+| Token | Hex | Usage |
 |---|---|---|
-| `--navy` | `#243B4E` | Wordmark, headings, nav background |
-| `--steel` | `#5D7E90` | Secondary accent, compass ring |
-| `--gold` | `#C6A671` | Divider rules, CTA accents, one star facet |
+| `--navy` | `#2F4A55` | Wordmark, headings, nav background, hero gradient |
+| `--steel` | `#6C8792` | Secondary accent, compass ring, "EUROPE BV" subtitle tone |
+| `--sand` | `#DFDACF` | True pale logo accent — reserved for thin decorative dividers |
+| `--gold` | `#A79162` | UI accent (buttons, eyebrow labels) — deepened from `--sand`'s hue for usable contrast; the logo's real accent is a pale warm grey/sand, too light on its own for CTA buttons or small text |
 | `--ink` | `#1A2530` | Body text |
 | `--grey` | `#6B7280` | Secondary/muted text |
 | `--bg` | `#FFFFFF` | Page background |
 | `--bg-alt` | `#F5F7F9` | Alternating section background |
 
-**Action needed:** these hex values are visual approximations from a screenshot, not extracted from the real logo file. Replace with exact values once the source logo (SVG or high-res transparent PNG) is provided, and swap the placeholder CSS compass mark in `index.html` for the real logo asset.
+Navy and steel were computed as weighted-average RGB across the actual logo pixels (Python/Pillow), not eyeballed. `--gold` is a deliberate design deviation (documented, not hidden) to keep the same warm hue family usable in UI contexts.
 
 ## Logo
 
-No source logo file has been provided yet (only a rendered image pasted into chat, which cannot be extracted as a usable asset). `index.html` currently uses a placeholder CSS/SVG four-point compass star recreated from the visual description, in the brand colors above. **Replace `images/logo.svg` (or `.png`) with the real file and update the `<header>` markup once available.**
+Client supplied the real logo files on 2026-09-17: `LOGO WestPoint.JPG`, `1.JPG`, `4.JPG` (full lockup: icon + wordmark + "Eindhoven, Netherlands"), `3.JPG` (icon only, clean), `2.JPG` (business card, used only to confirm contact details already in this file).
+
+- **`images/logo-icon.png`** — the real compass icon (from `3.JPG`), background removed programmatically (alpha threshold on near white pixels) and cropped tight. Used in the nav header, footer, and as the favicon source. Verified to read cleanly on both white and navy backgrounds.
+- **`images/favicon-16.png`, `favicon-32.png`, `favicon-180.png`, `favicon-48.png`, `favicon-256.png`** — generated from `logo-icon.png` at standard sizes; 16/32/180 are wired into `<head>`.
+- The raw client-supplied JPGs (`1.JPG`, `2.JPG`, `3.JPG`, `4.JPG`, `LOGO WestPoint.JPG`) are kept locally in `images/` for reference but excluded from git via `.gitignore` — the business card in particular has no reason to sit in a public repo, and none of the raw files are actually referenced by the page (only the processed `logo-icon.png` and favicons are).
+- The header still uses HTML text for "WEST POINT / EUROPE BV" (styled to match the logo's typography) rather than embedding the full raster lockup, so it scales cleanly at nav size — the icon image supplies the mark, the text supplies the wordmark.
 
 ---
 

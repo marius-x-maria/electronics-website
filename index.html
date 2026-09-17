@@ -5,20 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>West Point Europe BV — B2B Electronics Sales</title>
 <meta name="description" content="West Point Europe BV — B2B electronics distribution with offices in Eindhoven, Hangzhou, Bucharest, and Düsseldorf. Five years of reliable trade between Europe and Asia.">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#243B4E;
-    --navy-dk:#1A2B38;
-    --steel:#5D7E90;
-    --gold:#C6A671;
+    --navy:#2F4A55;
+    --navy-dk:#213640;
+    --steel:#6C8792;
+    --sand:#DFDACF;
+    --gold:#A79162;
     --ink:#1A2530;
     --grey:#6B7280;
     --bg:#FFFFFF;
     --bg-alt:#F5F7F9;
-    --border:rgba(36,59,78,0.12);
+    --border:rgba(47,74,85,0.14);
     --radius:4px;
     --maxw:1180px;
   }
@@ -65,15 +69,16 @@
   }
   .btn:hover{transform:translateY(-1px);}
   .btn-primary{background:var(--gold);color:var(--navy-dk);}
-  .btn-primary:hover{box-shadow:0 6px 18px rgba(198,166,113,0.4);}
+  .btn-primary:hover{box-shadow:0 6px 18px rgba(167,145,98,0.4);}
   .btn-outline{border-color:rgba(255,255,255,0.4);color:#fff;}
   .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
   .btn-outline-dark{border-color:var(--navy);color:var(--navy);}
   .btn-outline-dark:hover{background:var(--navy);color:#fff;}
 
-  /* ---------- Logo mark (placeholder — swap for real logo file, see brand-spec.md) ---------- */
+  /* ---------- Logo mark (real asset: images/logo-icon.png) ---------- */
   .logo-mark{
     width:34px;height:34px;flex-shrink:0;
+    object-fit:contain;
   }
   .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:0.01em;}
   .logo .wordmark{color:var(--navy);}
@@ -149,7 +154,7 @@
   }
   .card .icon{
     width:44px;height:44px;border-radius:10px;
-    background:rgba(198,166,113,0.14);
+    background:rgba(167,145,98,0.14);
     display:flex;align-items:center;justify-content:center;
     margin-bottom:18px;
     color:var(--gold);
@@ -256,11 +261,7 @@
 <header class="nav" id="siteNav">
   <div class="nav-inner">
     <a href="#top" class="logo">
-      <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" stroke="#5D7E90" stroke-width="2" opacity="0.5"/>
-        <path d="M50 6 L58 46 L50 94 L42 46 Z" fill="#243B4E"/>
-        <path d="M6 50 L46 42 L94 50 L46 58 Z" fill="#C6A671" opacity="0.85"/>
-      </svg>
+      <img class="logo-mark" src="images/logo-icon.png" alt="West Point Europe">
       <span class="wordmark">WEST POINT<span>EUROPE BV</span></span>
     </a>
     <nav class="nav-links" id="navLinks">
@@ -281,7 +282,7 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <span class="eyebrow" style="color:#C6A671">B2B Electronics Sales</span>
+      <span class="eyebrow" style="color:#A79162">B2B Electronics Sales</span>
       <h1>Your Trusted Partner in Global Electronics Trade</h1>
       <p class="lead">For five years, West Point Europe has connected manufacturers and buyers across Europe and Asia with reliable, fast, and transparent B2B electronics sales.</p>
       <div class="hero-ctas">
@@ -387,7 +388,7 @@
   <!-- ============ MISSION / VALUES ============ -->
   <section class="mission">
     <div class="wrap">
-      <span class="eyebrow" style="color:#C6A671">Our Mission</span>
+      <span class="eyebrow" style="color:#A79162">Our Mission</span>
       <h2>The most reliable bridge between electronics manufacturers and B2B buyers</h2>
       <p class="statement">We connect European demand with Asian supply, and back every shipment with the same standard we started with five years ago.</p>
       <div class="values-row">
@@ -488,11 +489,7 @@
   <div class="wrap">
     <div class="footer-top">
       <a href="#top" class="logo logo-light">
-        <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="46" stroke="#5D7E90" stroke-width="2" opacity="0.6"/>
-          <path d="M50 6 L58 46 L50 94 L42 46 Z" fill="#ffffff"/>
-          <path d="M6 50 L46 42 L94 50 L46 58 Z" fill="#C6A671" opacity="0.9"/>
-        </svg>
+        <img class="logo-mark" src="images/logo-icon.png" alt="West Point Europe">
         <span class="wordmark">WEST POINT<span>EUROPE BV</span></span>
       </a>
       <div class="footer-links">
