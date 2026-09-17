@@ -1,3 +1,6 @@
+# Secrets — never commit. This repo is PUBLIC.
+.env
+
 # Raw client-supplied source images (business card, raw logo exports) —
 # kept locally for reference, not needed in the public repo.
 # The actual site only uses images/logo-icon.png and images/favicon-*.png.

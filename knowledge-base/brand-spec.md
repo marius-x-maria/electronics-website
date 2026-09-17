@@ -28,20 +28,20 @@ This file is the canonical record of brand and content facts for the West Point 
 
 ---
 
-## Brand Colors (confirmed — extracted programmatically from the client-supplied logo files, 2026-09-17)
+## Brand Colors (official, client supplied 2026-09-17 — supersedes the earlier logo-extracted approximation)
 
 | Token | Hex | Usage |
 |---|---|---|
-| `--navy` | `#2F4A55` | Wordmark, headings, nav background, hero gradient |
-| `--steel` | `#6C8792` | Secondary accent, compass ring, "EUROPE BV" subtitle tone |
-| `--sand` | `#DFDACF` | True pale logo accent — reserved for thin decorative dividers |
-| `--gold` | `#A79162` | UI accent (buttons, eyebrow labels) — deepened from `--sand`'s hue for usable contrast; the logo's real accent is a pale warm grey/sand, too light on its own for CTA buttons or small text |
+| `--navy` | `#283D4E` | Official brand navy. Wordmark, headings, nav background, hero gradient |
+| `--teal` | `#005D63` | Official brand teal. Primary UI accent — buttons, eyebrow labels, icons, values row |
+| `--steel` | `#6C8792` | Secondary tone (extracted from logo pixels) — compass ring, hero gradient endpoint |
+| `--sand` | `#DFDACF` | Pale logo accent (extracted from logo pixels) — reserved for thin decorative dividers |
 | `--ink` | `#1A2530` | Body text |
 | `--grey` | `#6B7280` | Secondary/muted text |
 | `--bg` | `#FFFFFF` | Page background |
 | `--bg-alt` | `#F5F7F9` | Alternating section background |
 
-Navy and steel were computed as weighted-average RGB across the actual logo pixels (Python/Pillow), not eyeballed. `--gold` is a deliberate design deviation (documented, not hidden) to keep the same warm hue family usable in UI contexts.
+`--navy` and `--teal` are the two official hex codes given directly by the client (2026-09-17), replacing the earlier logo-extracted navy approximation (`#2F4A55`, close but not exact) and the invented bronze accent (`#A79162`, a stand in used before the real teal was known). `--steel` and `--sand` remain logo-extracted supporting tones, unchanged.
 
 ## Logo
 
@@ -85,6 +85,12 @@ Client supplied the real logo files on 2026-09-17: `LOGO WestPoint.JPG`, `1.JPG`
 | Hosting: new GitHub repo + Pages, default URL | Client decision (2026-09-17) — hold off on connecting westpointeurope.com until design is approved |
 
 ---
+
+## Production Hosting (SFTP)
+
+Client provided real SFTP credentials for a production webspace on 2026-09-17. These are stored **only** in `.env` at the project root, which is excluded from git via `.gitignore` — this repo is public, so neither the host, username, nor password may appear in any tracked file, commit, or this document. See `.env.example` for the expected variable names (values live in `.env` only).
+
+**Not yet used.** No files have been uploaded to this host. Deploying there would go live on real production infrastructure and was not yet explicitly confirmed as "do this now" — check with the client before the first upload, and confirm the target directory won't overwrite anything already live at that host.
 
 ## Links
 

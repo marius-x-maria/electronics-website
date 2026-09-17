@@ -34,7 +34,7 @@ Single file PWA style site (`index.html`), no build step, no framework — same 
 - Scroll reveal via IntersectionObserver
 - Nav frosts to white on scroll (same technique as the wedding site)
 - Google Fonts: Manrope (400–800 weights)
-- Placeholder CSS/SVG compass star logo mark, recreated visually from a chat screenshot — **not the real logo file**
+- Real logo icon (`images/logo-icon.png`, background removed, cropped from the client-supplied file), used in nav, footer, and favicon
 
 ### Contact Form
 
@@ -46,13 +46,12 @@ No backend wired up. Currently intercepts submit and opens a `mailto:` draft to 
 
 | Item | Notes |
 |---|---|
-| Real logo file | Only have a chat screenshot, not a usable asset. Need the source SVG/PNG (transparent background ideally) to replace the placeholder CSS/SVG mark in `index.html` and set a proper favicon |
-| Exact brand colors | Current palette (`--navy #243B4E`, `--steel #5D7E90`, `--gold #C6A671`) is a visual approximation, not color picked from a real file. Confirm or correct once the logo asset is available |
 | Real services list | Current 6 service cards are generic B2B electronics distribution placeholders. Replace with the client's actual service offering |
 | Real metrics (optional) | If the client wants to show numbers like brand count, partner count, or warehouse size (as both reference sites do), only add ones that are true — do not invent figures |
-| Contact form backend | Needs a real mechanism (Formspree, a Google Apps Script pattern like the wedding site's, or similar) before this goes live for actual lead capture |
-| Hosting | Not yet published. Client decision (2026-09-17): new GitHub repo + GitHub Pages, default `.github.io` URL for now. Custom domain `westpointeurope.com` to be connected later, once DNS access is confirmed |
-| Favicon / OG image | Not yet created — depends on the real logo file |
+| Contact form backend | Explicitly deferred by the client (2026-09-17), "leave it for the moment." Needs a real mechanism (Formspree, a Google Apps Script pattern like the wedding site's, or similar) before this goes live for actual lead capture |
+| Production SFTP deployment | Client provided real SFTP credentials (2026-09-17), stored in `.env` (gitignored, never committed — this repo is public). **Not yet used to upload anything.** Confirm target directory and get explicit go ahead before the first upload — could overwrite whatever is currently live at that host |
+| Custom domain | `westpointeurope.com` not yet connected to GitHub Pages — client decision (2026-09-17) was default `.github.io` URL for now. May become moot if the SFTP host ends up being the real production target instead of GitHub Pages — clarify which hosting path is authoritative before doing more DNS work |
+| OG image | Not yet created |
 
 ---
 
@@ -70,14 +69,15 @@ No backend wired up. Currently intercepts submit and opens a `mailto:` draft to 
 
 See `knowledge-base/brand-spec.md` for the full color table, content status, and design reasoning.
 
-### Colour Palette (approximate — pending real logo file)
+### Colour Palette (official — client supplied 2026-09-17)
 
 | Token | Hex | Usage |
 |---|---|---|
-| `--navy` | `#243B4E` | Wordmark, headings, hero/mission backgrounds |
-| `--navy-dk` | `#1A2B38` | Darkest gradient stop, footer background |
-| `--steel` | `#5D7E90` | Secondary accent, compass ring |
-| `--gold` | `#C6A671` | CTA buttons, dividers, eyebrow labels |
+| `--navy` | `#283D4E` | Official brand navy — wordmark, headings, hero/mission backgrounds |
+| `--navy-dk` | `#1B2B37` | Darkest gradient stop, footer background |
+| `--teal` | `#005D63` | Official brand teal — CTA buttons, eyebrow labels, icons |
+| `--steel` | `#6C8792` | Secondary tone extracted from logo pixels — compass ring, hero gradient |
+| `--sand` | `#DFDACF` | Pale logo accent — decorative dividers only |
 | `--ink` | `#1A2530` | Body text |
 | `--grey` | `#6B7280` | Secondary/muted text |
 | `--bg` | `#FFFFFF` | Page background |
