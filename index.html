@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>West Point Europe BV — B2B Electronics Sales</title>
+<meta name="description" content="West Point Europe BV — B2B electronics distribution with offices in Eindhoven, Hangzhou, Bucharest, and Düsseldorf. Five years of reliable trade between Europe and Asia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#243B4E;
+    --navy-dk:#1A2B38;
+    --steel:#5D7E90;
+    --gold:#C6A671;
+    --ink:#1A2530;
+    --grey:#6B7280;
+    --bg:#FFFFFF;
+    --bg-alt:#F5F7F9;
+    --border:rgba(36,59,78,0.12);
+    --radius:4px;
+    --maxw:1180px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:88px 0;}
+  .eyebrow{
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+    display:block;
+  }
+  h1,h2,h3{color:var(--navy);font-weight:800;letter-spacing:-0.01em;}
+  h2{font-size:clamp(26px,3.4vw,38px);margin-bottom:16px;}
+  h3{font-size:19px;margin-bottom:10px;}
+  .section-intro{max-width:640px;margin-bottom:48px;}
+  .section-intro p{color:var(--grey);font-size:16px;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 26px;
+    border-radius:var(--radius);
+    font-weight:700;
+    font-size:14.5px;
+    letter-spacing:0.02em;
+    border:1.5px solid transparent;
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--gold);color:var(--navy-dk);}
+  .btn-primary:hover{box-shadow:0 6px 18px rgba(198,166,113,0.4);}
+  .btn-outline{border-color:rgba(255,255,255,0.4);color:#fff;}
+  .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
+  .btn-outline-dark{border-color:var(--navy);color:var(--navy);}
+  .btn-outline-dark:hover{background:var(--navy);color:#fff;}
+
+  /* ---------- Logo mark (placeholder — swap for real logo file, see brand-spec.md) ---------- */
+  .logo-mark{
+    width:34px;height:34px;flex-shrink:0;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:0.01em;}
+  .logo .wordmark{color:var(--navy);}
+  .logo .wordmark span{display:block;font-size:9px;font-weight:600;letter-spacing:0.18em;color:var(--grey);margin-top:1px;}
+  .logo-light .wordmark,.logo-light .wordmark span{color:#fff;}
+  .logo-light .wordmark span{color:rgba(255,255,255,0.65);}
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(255,255,255,0);
+    transition:background 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease;
+  }
+  header.nav.scrolled{
+    background:rgba(255,255,255,0.96);
+    backdrop-filter:blur(8px);
+    box-shadow:0 1px 0 var(--border);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:18px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{font-size:14.5px;font-weight:600;color:var(--navy);opacity:0.85;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{margin-left:8px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
+  .hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(160deg,var(--navy-dk) 0%, var(--navy) 55%, var(--steel) 130%);
+    color:#fff;
+    padding:170px 0 110px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;right:-120px;top:-120px;
+    width:480px;height:480px;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:50%;
+  }
+  .hero-inner{max-width:640px;position:relative;z-index:1;}
+  .hero h1{
+    color:#fff;font-size:clamp(32px,5vw,52px);line-height:1.12;margin-bottom:20px;
+  }
+  .hero p.lead{font-size:17.5px;color:rgba(255,255,255,0.8);max-width:520px;margin-bottom:36px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* ---------- Stats strip ---------- */
+  .stats{
+    background:var(--bg-alt);
+    border-bottom:1px solid var(--border);
+  }
+  .stats .wrap{
+    padding:40px 24px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  }
+  .stat{text-align:center;}
+  .stat .num{font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--navy);display:block;}
+  .stat .label{font-size:13px;color:var(--grey);font-weight:600;letter-spacing:0.02em;margin-top:4px;}
+
+  /* ---------- Pillars / cards grid ---------- */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .card{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px 28px;
+  }
+  .card .icon{
+    width:44px;height:44px;border-radius:10px;
+    background:rgba(198,166,113,0.14);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+    color:var(--gold);
+    font-size:20px;font-weight:800;
+  }
+  .card p{color:var(--grey);font-size:15px;}
+
+  .alt-bg{background:var(--bg-alt);}
+
+  /* ---------- Mission ---------- */
+  .mission{
+    background:var(--navy);
+    color:#fff;
+    text-align:center;
+  }
+  .mission h2{color:#fff;}
+  .mission p.statement{
+    max-width:680px;margin:0 auto 40px;
+    font-size:19px;color:rgba(255,255,255,0.85);
+  }
+  .values-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
+  .values-row .value{font-weight:700;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;color:var(--gold);}
+
+  /* ---------- Global presence ---------- */
+  .offices-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .office-card{
+    border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px 22px;
+  }
+  .office-card .tag{
+    font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--gold);
+    text-transform:uppercase;margin-bottom:10px;display:inline-block;
+  }
+  .office-card h3{font-size:18px;margin-bottom:4px;}
+  .office-card p{color:var(--grey);font-size:14px;}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start;}
+  .contact-info h3{margin-top:28px;font-size:15px;color:var(--navy);}
+  .contact-info p, .contact-info a{color:var(--grey);font-size:15px;}
+  .contact-info .row{margin-bottom:18px;}
+  form.contact-form{display:flex;flex-direction:column;gap:16px;}
+  .field label{
+    display:block;font-size:13px;font-weight:700;color:var(--navy);
+    margin-bottom:6px;letter-spacing:0.02em;
+  }
+  .field input, .field textarea{
+    width:100%;padding:12px 14px;border:1.5px solid var(--border);
+    border-radius:var(--radius);font-family:inherit;font-size:14.5px;color:var(--ink);
+    background:var(--bg-alt);
+  }
+  .field input:focus, .field textarea:focus{outline:2px solid var(--steel);outline-offset:1px;}
+  .field textarea{min-height:120px;resize:vertical;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-dk);color:rgba(255,255,255,0.7);padding:56px 0 28px;}
+  .footer-top{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    flex-wrap:wrap;gap:32px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-links{display:flex;gap:60px;flex-wrap:wrap;}
+  .footer-links h4{color:#fff;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;}
+  .footer-links a, .footer-links li{font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:9px;display:block;}
+  .footer-links a:hover{color:#fff;}
+  .footer-bottom{
+    padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-size:13px;color:rgba(255,255,255,0.45);
+  }
+
+  /* ---------- Reveal-on-scroll ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.visible{opacity:1;transform:none;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .grid-3, .grid-6{grid-template-columns:repeat(2,1fr);}
+    .offices-grid{grid-template-columns:repeat(2,1fr);}
+    .stats .wrap{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;}
+    .nav-links{
+      position:fixed;top:0;right:-100%;height:100vh;width:78%;max-width:320px;
+      background:#fff;flex-direction:column;justify-content:flex-start;align-items:flex-start;
+      padding:100px 32px;gap:26px;transition:right 0.3s ease;box-shadow:-8px 0 24px rgba(0,0,0,0.08);
+    }
+    .nav-links.open{right:0;}
+    .hamburger{display:flex;}
+    .nav-cta{margin-left:0;margin-top:8px;}
+  }
+  @media (max-width:640px){
+    section{padding:64px 0;}
+    .grid-3, .grid-6, .offices-grid{grid-template-columns:1fr;}
+    .stats .wrap{grid-template-columns:repeat(2,1fr);}
+    .hero{padding:140px 0 80px;}
+    .footer-top{flex-direction:column;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{transition:none;opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" stroke="#5D7E90" stroke-width="2" opacity="0.5"/>
+        <path d="M50 6 L58 46 L50 94 L42 46 Z" fill="#243B4E"/>
+        <path d="M6 50 L46 42 L94 50 L46 58 Z" fill="#C6A671" opacity="0.85"/>
+      </svg>
+      <span class="wordmark">WEST POINT<span>EUROPE BV</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#offices">Global Presence</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-outline-dark nav-cta">Get in Touch</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <span class="eyebrow" style="color:#C6A671">B2B Electronics Sales</span>
+      <h1>Your Trusted Partner in Global Electronics Trade</h1>
+      <p class="lead">For five years, West Point Europe has connected manufacturers and buyers across Europe and Asia with reliable, fast, and transparent B2B electronics sales.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="#services" class="btn btn-outline">Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="stat">
+        <span class="num">5+</span>
+        <span class="label">Years in Business</span>
+      </div>
+      <div class="stat">
+        <span class="num">4</span>
+        <span class="label">Global Office Locations</span>
+      </div>
+      <div class="stat">
+        <span class="num">B2B</span>
+        <span class="label">Electronics Sales Focus</span>
+      </div>
+      <div class="stat">
+        <span class="num">EU + APAC</span>
+        <span class="label">Trade Corridor</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT / WHY US ============ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-intro reveal" style="max-width:760px;">
+        <span class="eyebrow">About West Point Europe</span>
+        <h2>A Premier B2B Global Distributor</h2>
+        <p>West Point Europe is a premier B2B global distributor specializing in a comprehensive portfolio of electronic components, enterprise hardware, and consumer technology. We bridge the gap between world class manufacturers and businesses worldwide. Backed by a robust logistics network spanning multiple continents, we provide seamless supply chain solutions, guaranteed authenticity, and scalable inventory management tailored to the dynamic needs of OEMs, ODMs, and enterprise clients.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card reveal">
+          <div class="icon">1</div>
+          <h3>Reliability</h3>
+          <p>Five years of consistent, on time delivery for B2B partners across Europe, built on long term supplier relationships.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">2</div>
+          <h3>Global Reach</h3>
+          <p>With offices in Eindhoven, Düsseldorf, Bucharest, and Hangzhou, we bridge European demand with Asian supply directly.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">3</div>
+          <h3>Speed to Market</h3>
+          <p>Streamlined sourcing and logistics move electronics from factory floor to customer faster, with fewer intermediaries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services" class="alt-bg">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <span class="eyebrow">What We Do</span>
+        <h2>End to end B2B electronics trade</h2>
+        <p>From sourcing to final delivery, we handle the steps that make cross border electronics trade work.</p>
+      </div>
+      <div class="grid-6">
+        <div class="card reveal">
+          <div class="icon">◆</div>
+          <h3>Electronics Distribution</h3>
+          <p>Bulk and B2B distribution of electronics across European markets.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">◆</div>
+          <h3>Sourcing &amp; Procurement</h3>
+          <p>Direct sourcing from manufacturers, with our Hangzhou office on the ground.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">◆</div>
+          <h3>Logistics &amp; Warehousing</h3>
+          <p>Coordinated shipping and storage across our European hubs.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">◆</div>
+          <h3>Quality Assurance</h3>
+          <p>Checks at key points in the supply chain to protect product quality.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">◆</div>
+          <h3>Market Access</h3>
+          <p>Helping manufacturers enter European markets through an established network.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon">◆</div>
+          <h3>After Sales Support</h3>
+          <p>Ongoing support for partners after the sale is complete.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MISSION / VALUES ============ -->
+  <section class="mission">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#C6A671">Our Mission</span>
+      <h2>The most reliable bridge between electronics manufacturers and B2B buyers</h2>
+      <p class="statement">We connect European demand with Asian supply, and back every shipment with the same standard we started with five years ago.</p>
+      <div class="values-row">
+        <span class="value">Reliability</span>
+        <span class="value">Partnership</span>
+        <span class="value">Integrity</span>
+        <span class="value">Speed</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GLOBAL PRESENCE ============ -->
+  <section id="offices">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <span class="eyebrow">Global Presence</span>
+        <h2>Where you'll find us</h2>
+        <p>Four offices, one supply chain — from sourcing in China to sales across Europe.</p>
+      </div>
+      <div class="offices-grid">
+        <div class="office-card reveal">
+          <span class="tag">Headquarters</span>
+          <h3>Eindhoven</h3>
+          <p>Netherlands</p>
+        </div>
+        <div class="office-card reveal">
+          <span class="tag">Sourcing</span>
+          <h3>Hangzhou</h3>
+          <p>China</p>
+        </div>
+        <div class="office-card reveal">
+          <span class="tag">Sales</span>
+          <h3>Bucharest</h3>
+          <p>Romania</p>
+        </div>
+        <div class="office-card reveal">
+          <span class="tag">Sales</span>
+          <h3>Düsseldorf</h3>
+          <p>Germany</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="alt-bg">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <span class="eyebrow">Get in Touch</span>
+          <h2>Let's talk business</h2>
+          <p style="color:var(--grey);margin-bottom:8px;">Tell us what you're looking for and we'll get back to you.</p>
+          <form class="contact-form" id="contactForm">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+          </form>
+        </div>
+        <div class="contact-info reveal">
+          <h3>Direct Contact</h3>
+          <div class="row">
+            <p style="font-weight:700;color:var(--navy);">Andrei Babcinetzki</p>
+            <p>COO</p>
+          </div>
+          <div class="row">
+            <p><a href="tel:+31687351156">+31 6 8735 1156</a></p>
+          </div>
+          <div class="row">
+            <p><a href="mailto:andrei@westpointeurope.com">andrei@westpointeurope.com</a></p>
+          </div>
+          <div class="row">
+            <p><a href="https://www.westpointeurope.com" target="_blank" rel="noopener">www.westpointeurope.com</a></p>
+          </div>
+          <h3>Offices</h3>
+          <p>Eindhoven &middot; Hangzhou &middot; Bucharest &middot; Düsseldorf</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <a href="#top" class="logo logo-light">
+        <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" stroke="#5D7E90" stroke-width="2" opacity="0.6"/>
+          <path d="M50 6 L58 46 L50 94 L42 46 Z" fill="#ffffff"/>
+          <path d="M6 50 L46 42 L94 50 L46 58 Z" fill="#C6A671" opacity="0.9"/>
+        </svg>
+        <span class="wordmark">WEST POINT<span>EUROPE BV</span></span>
+      </a>
+      <div class="footer-links">
+        <div>
+          <h4>Navigate</h4>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#offices">Global Presence</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:andrei@westpointeurope.com">andrei@westpointeurope.com</a>
+          <a href="tel:+31687351156">+31 6 8735 1156</a>
+        </div>
+        <div>
+          <h4>Offices</h4>
+          <span>Eindhoven, Netherlands</span>
+          <span>Hangzhou, China</span>
+          <span>Bucharest, Romania</span>
+          <span>Düsseldorf, Germany</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 West Point Europe BV. All rights reserved.</span>
+      <span>B2B Electronics Sales</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav frost on scroll
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, { passive: true });
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Contact form — no backend wired up yet, falls back to mailto.
+  // See knowledge-base/brand-spec.md "Content Status" for what's needed before launch.
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = this.name.value;
+    const company = this.company.value;
+    const email = this.email.value;
+    const message = this.message.value;
+    const body = `Name: ${name}%0D%0ACompany: ${company}%0D%0AEmail: ${email}%0D%0A%0D%0A${encodeURIComponent(message)}`;
+    window.location.href = `mailto:andrei@westpointeurope.com?subject=Website Inquiry from ${encodeURIComponent(name)}&body=${body}`;
+  });
+</script>
+
+</body>
+</html>
