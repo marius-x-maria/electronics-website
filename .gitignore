@@ -1,5 +1,22 @@
 # Secrets — never commit. This repo is PUBLIC.
 .env
+.env.local
+!.env.example
+credentials.json
+token.json
+*.pem
+*.key
+id_rsa
+
+# Regenerable / local-only
+.tmp/
+*.log
+
+# OS + editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
 
 # Raw client-supplied source images (business card, raw logo exports) —
 # kept locally for reference, not needed in the public repo.
