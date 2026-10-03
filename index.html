@@ -41,6 +41,9 @@
   ul{list-style:none;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
   section{padding:88px 0;}
+  /* The header is position:fixed, so anchor targets must reserve its height
+     or the section eyebrow lands underneath the bar. */
+  section[id],#top{scroll-margin-top:84px;}
   .eyebrow{
     font-size:12.5px;
     font-weight:700;
@@ -69,7 +72,13 @@
     transition:transform 0.15s ease, box-shadow 0.15s ease;
   }
   .btn:hover{transform:translateY(-1px);}
-  .btn-primary{background:var(--gold);color:var(--navy-dk);}
+  a:focus-visible,button:focus-visible{
+    outline:2px solid var(--steel);outline-offset:2px;border-radius:var(--radius);
+  }
+  .hero a:focus-visible,.mission a:focus-visible,
+  header.nav:not(.scrolled) a:focus-visible,
+  header.nav:not(.scrolled) button:focus-visible{outline-color:#fff;}
+  .btn-primary{background:var(--gold);color:#fff;}
   .btn-primary:hover{box-shadow:0 6px 18px rgba(0,93,99,0.4);}
   .btn-outline{border-color:rgba(255,255,255,0.4);color:#fff;}
   .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08);}
@@ -108,6 +117,15 @@
   .nav-cta{margin-left:8px;}
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
   .hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;}
+  /* Top-of-page state: the bar is transparent over the navy hero, so its
+     contents must invert to white. Mirrors the .logo-light idiom in the footer.
+     Re-asserted back to navy at <=900px, where the drawer has a white panel. */
+  header.nav:not(.scrolled) .logo .wordmark{color:#fff;}
+  header.nav:not(.scrolled) .logo .wordmark span{color:rgba(255,255,255,0.65);}
+  header.nav:not(.scrolled) .nav-links > a{color:#fff;}
+  header.nav:not(.scrolled) .nav-cta{border-color:rgba(255,255,255,0.4);color:#fff;}
+  header.nav:not(.scrolled) .nav-cta:hover{background:rgba(255,255,255,0.08);border-color:#fff;}
+  header.nav:not(.scrolled) .hamburger span{background:#fff;}
 
   /* ---------- Hero ---------- */
   .hero{
@@ -129,12 +147,16 @@
     color:#fff;font-size:clamp(32px,5vw,52px);line-height:1.12;margin-bottom:20px;
   }
   .hero p.lead{font-size:17.5px;color:rgba(255,255,255,0.8);max-width:520px;margin-bottom:36px;}
+  /* --teal on --navy is ~1.5:1. Eyebrows on dark bands go white; the uppercase
+     letterspaced treatment carries the accent role instead of the colour. */
+  .hero .eyebrow{color:#fff;opacity:0.72;}
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
 
   /* ---------- Stats strip ---------- */
   .stats{
     background:var(--bg-alt);
     border-bottom:1px solid var(--border);
+    padding:0; /* .stats .wrap supplies the padding; section{} would double it */
   }
   .stats .wrap{
     padding:40px 24px;
@@ -172,12 +194,13 @@
     text-align:center;
   }
   .mission h2{color:#fff;}
+  .mission .eyebrow{color:#fff;opacity:0.72;}
   .mission p.statement{
     max-width:680px;margin:0 auto 40px;
     font-size:19px;color:rgba(255,255,255,0.85);
   }
   .values-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
-  .values-row .value{font-weight:700;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;color:var(--gold);}
+  .values-row .value{font-weight:700;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;color:#fff;}
 
   /* ---------- Global presence ---------- */
   .offices-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
@@ -238,11 +261,20 @@
     .nav-links{
       position:fixed;top:0;right:-100%;height:100vh;width:78%;max-width:320px;
       background:#fff;flex-direction:column;justify-content:flex-start;align-items:flex-start;
-      padding:100px 32px;gap:26px;transition:right 0.3s ease;box-shadow:-8px 0 24px rgba(0,0,0,0.08);
+      padding:100px 32px;gap:26px;box-shadow:-8px 0 24px rgba(0,0,0,0.08);
+      /* visibility keeps the closed drawer out of the tab order; the delay lets
+         the slide-out finish before it is hidden. */
+      visibility:hidden;
+      transition:right 0.3s ease, visibility 0s linear 0.3s;
     }
-    .nav-links.open{right:0;}
+    .nav-links.open{right:0;visibility:visible;transition:right 0.3s ease, visibility 0s;}
     .hamburger{display:flex;}
     .nav-cta{margin-left:0;margin-top:8px;}
+    /* The drawer panel is white, so its contents stay navy even at the top of the page. */
+    header.nav:not(.scrolled) .nav-links > a{color:var(--navy);}
+    header.nav:not(.scrolled) .nav-cta{border-color:var(--navy);color:var(--navy);}
+    header.nav:not(.scrolled) .nav-cta:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+    header.nav:not(.scrolled) .nav-links a:focus-visible{outline-color:var(--steel);}
   }
   @media (max-width:640px){
     section{padding:64px 0;}
@@ -256,6 +288,11 @@
     .reveal{transition:none;opacity:1;transform:none;}
   }
 </style>
+<noscript><style>
+  /* Without JS the IntersectionObserver never runs and everything from
+     About down would stay at opacity:0. */
+  .reveal{opacity:1;transform:none;}
+</style></noscript>
 </head>
 <body>
 
@@ -272,7 +309,7 @@
       <a href="#contact">Contact</a>
       <a href="#contact" class="btn btn-outline-dark nav-cta">Get in Touch</a>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -283,7 +320,7 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <span class="eyebrow" style="color:#005D63">B2B Electronics Sales</span>
+      <span class="eyebrow">B2B Electronics Sales</span>
       <h1>Your Trusted Partner in Global Electronics Trade</h1>
       <p class="lead">For five years, West Point Europe has connected manufacturers and buyers across Europe and Asia with reliable, fast, and transparent B2B electronics sales.</p>
       <div class="hero-ctas">
@@ -389,7 +426,7 @@
   <!-- ============ MISSION / VALUES ============ -->
   <section class="mission">
     <div class="wrap">
-      <span class="eyebrow" style="color:#005D63">Our Mission</span>
+      <span class="eyebrow">Our Mission</span>
       <h2>The most reliable bridge between electronics manufacturers and B2B buyers</h2>
       <p class="statement">We connect European demand with Asian supply, and back every shipment with the same standard we started with five years ago.</p>
       <div class="values-row">
@@ -532,11 +569,15 @@
   // Mobile menu toggle
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
+  const setMenu = (open) => {
+    navLinks.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  };
   hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
+    setMenu(!navLinks.classList.contains('open'));
   });
   navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navLinks.classList.remove('open'));
+    a.addEventListener('click', () => setMenu(false));
   });
 
   // Scroll reveal

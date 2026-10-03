@@ -10,7 +10,47 @@ You maintain and build the marketing website for **West Point Europe BV**, a B2B
 
 ---
 
-## What's Built
+## Capability Registry
+
+**Single source of truth for what exists.** Four states: `included` (built, expected to work) · `available` (partial — the note says exactly what is missing) · `absent` (not built; add only on request) · `removed` (deliberately deleted; restore only on request).
+
+**Without a row, a capability is `absent`.** Existing code is not a request — finding a half-built thing does not authorize finishing it.
+
+| Capability | State | Note |
+|---|---|---|
+| Single-page site (`index.html`) | `included` | No build step, no framework |
+| Header / sticky nav | `included` | Frosts on scroll; mobile hamburger + slide-in drawer |
+| Hero + two CTAs | `included` | Navy gradient background |
+| Stats strip | `included` | 4 confirmed facts only — see Rule 1 |
+| Why West Point (3 pillars) | `included` | Reliability, Global Reach, Speed to Market |
+| Mission / values band | `included` | Navy full-width, 4 values |
+| Global Presence (4 offices) | `included` | Eindhoven HQ, Hangzhou, Bucharest, Düsseldorf |
+| Footer | `included` | Logo, nav repeat, contact, office list |
+| Responsive layout | `included` | Breakpoints at 900 px and 640 px; test at 375 and 680 per Rule 5 |
+| Scroll reveal | `included` | IntersectionObserver |
+| Logo + favicon set | `included` | 16/32/48/180/256; 16/32/180 wired into `<head>` |
+| Brand tokens in `:root` | `included` | Official client palette — see Design Spec |
+| GitHub Pages preview deploy | `included` | Default `.github.io` URL. The intended current state — see Rule 3 |
+| Services list | `available` | 6 cards are **generic placeholders** — needs the client's real service offering |
+| Contact form | `available` | Renders and validates, but only opens a `mailto:` draft. Not real lead capture. **No pending / success / error state** — submit jumps straight to `mailto:` with no feedback, `required` relies on native browser bubbles, and no `aria-describedby` links an error to its field. Fails the four-states check in [[ui_specialist]]; a real success state is a product decision, not a UI fix |
+| Contact form backend | `absent` | Client deferred 2026-09-17 ("leave it for the moment"). Options: Formspree, or the wedding site's Apps Script pattern |
+| Real metrics | `absent` | Only if the client supplies true figures. **Never invent them** — Rule 1 |
+| OG / social share image | `absent` | Not created |
+| Custom domain | `absent` | `westpointeurope.com` not connected — gated on client approval |
+| SFTP production deploy | `absent` | Credentials in `.env` (gitignored), **never used**. Confirm target directory and get explicit go-ahead first — could overwrite whatever is live |
+| Dark theme | `absent` | Not requested. Visual checks shoot light only |
+| Automated tests | `absent` | Tier 0 — Playwright Python behaviour tests are possible; none written yet |
+| Build tooling / bundler | `removed` | Deliberate — Rule 2. Restoring it is a Tier-1 decision, see [[web-tier-upgrade]] |
+| Backend / database | `absent` | Tier 2 — needs Docker and paid hosting |
+| Accounts / auth | `absent` | Tier 2 |
+| Payments | `absent` | Tier 2 |
+| Infrastructure as code | `absent` | Not adopted — no Terraform in this framework |
+
+**Director:** Vibe Coder Agent · **Tier:** 0 (zero-build static) · **Engaged subagents:** [[ui_specialist]], [[web_deploy_specialist]], plus [[frontend_engineer]] for any non-trivial slice.
+
+---
+
+## How It Works (reference)
 
 Single file PWA style site (`index.html`), no build step, no framework — same low risk pattern as the wedding project.
 
@@ -36,22 +76,13 @@ Single file PWA style site (`index.html`), no build step, no framework — same 
 - Google Fonts: Manrope (400–800 weights)
 - Real logo icon (`images/logo-icon.png`, background removed, cropped from the client-supplied file), used in nav, footer, and favicon
 
-### Contact Form
+### Contact Form Stopgap
 
-No backend wired up. Currently intercepts submit and opens a `mailto:` draft to `andrei@westpointeurope.com` with the form fields pre filled. This is a stopgap, not a real lead capture mechanism — see Pending below.
+No backend. Submit is intercepted and opens a `mailto:` draft to `andrei@westpointeurope.com` with the fields pre-filled. Not real lead capture — see the registry row.
 
----
+### Open Hosting Question
 
-## What's Pending
-
-| Item | Notes |
-|---|---|
-| Real services list | Current 6 service cards are generic B2B electronics distribution placeholders. Replace with the client's actual service offering |
-| Real metrics (optional) | If the client wants to show numbers like brand count, partner count, or warehouse size (as both reference sites do), only add ones that are true — do not invent figures |
-| Contact form backend | Explicitly deferred by the client (2026-09-17), "leave it for the moment." Needs a real mechanism (Formspree, a Google Apps Script pattern like the wedding site's, or similar) before this goes live for actual lead capture |
-| Production SFTP deployment | Client provided real SFTP credentials (2026-09-17), stored in `.env` (gitignored, never committed — this repo is public). **Not yet used to upload anything.** Confirm target directory and get explicit go ahead before the first upload — could overwrite whatever is currently live at that host |
-| Custom domain | `westpointeurope.com` not yet connected to GitHub Pages — client decision (2026-09-17) was default `.github.io` URL for now. May become moot if the SFTP host ends up being the real production target instead of GitHub Pages — clarify which hosting path is authoritative before doing more DNS work |
-| OG image | Not yet created |
+`westpointeurope.com` and the client's SFTP host are both `absent`. Before any DNS work, clarify which is the authoritative production path — GitHub Pages with a custom domain, or the SFTP host. Doing both is how a site ends up live in two places that drift.
 
 ---
 
@@ -100,7 +131,7 @@ Manrope (400, 500, 600, 700, 800) — single font family, sans-serif, used for b
 
 1. **No fabricated statistics** — only show numbers confirmed by the client (currently: 5+ years, 4 offices). Do not invent brand/partner counts to match the reference sites' style.
 2. **No build tools** — keep the single file architecture unless the client explicitly wants the real Ant Design React component library, which would be a materially different, heavier project.
-3. **Do not connect the real domain or publish publicly** until the client has approved the design — current decision is a default GitHub Pages URL only.
+3. **GitHub Pages is the preview, and that is the intended current state.** The default `.github.io` URL is where the client reviews the design — it being live there is correct, not a breach. What stays gated until the client approves: connecting `westpointeurope.com`, and uploading anything to the client's SFTP host. Do neither without an explicit go-ahead.
 4. **Replace placeholder content clearly** — services list and logo are known placeholders; do not present them to the client as final without flagging that they're provisional.
 5. **Mobile first** — test all additions at 375px and 680px, matching the wedding project's proven breakpoints.
 
