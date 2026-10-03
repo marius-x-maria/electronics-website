@@ -61,7 +61,9 @@ No backend wired up. Currently intercepts submit and opens a `mailto:` draft to 
 |---|---|
 | `index.html` | The entire site — HTML, CSS, JS, all in one file |
 | `knowledge-base/brand-spec.md` | Single source of truth for all brand facts, colors, content status, and design references |
-| `images/` | Empty — waiting on the real logo asset |
+| `images/logo-icon.png` | Real logo mark (background removed, cropped) — used in nav, footer, favicon source |
+| `images/favicon-*.png` | 16/32/48/180/256px favicon set; 16/32/180 wired into `<head>` |
+| `images/*.JPG` | Raw client-supplied originals (logo exports, business card) — **gitignored**, local reference only |
 
 ---
 
