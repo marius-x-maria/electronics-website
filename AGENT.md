@@ -32,7 +32,7 @@ You maintain and build the marketing website for **West Point Europe BV**, a B2B
 | Brand tokens in `:root` | `included` | Official client palette — see Design Spec |
 | GitHub Pages preview deploy | `included` | Default `.github.io` URL. The intended current state — see Rule 3 |
 | Services list | `available` | 6 cards are **generic placeholders** — needs the client's real service offering |
-| Contact form | `available` | Renders and validates, but only opens a `mailto:` draft. Not real lead capture. **No pending / success / error state** — submit jumps straight to `mailto:` with no feedback, `required` relies on native browser bubbles, and no `aria-describedby` links an error to its field. Fails the four-states check in [[ui_specialist]]; a real success state is a product decision, not a UI fix |
+| Contact form | `available` | Renders and validates, but only opens a `mailto:` draft. Not real lead capture. **No pending / success / error state** — submit jumps straight to `mailto:` with no feedback, `required` relies on native browser bubbles, and no `aria-describedby` links an error to its field. Fails the four-states check in [[ui-specialist]]; a real success state is a product decision, not a UI fix |
 | Contact form backend | `absent` | Client deferred 2026-09-17 ("leave it for the moment"). Options: Formspree, or the wedding site's Apps Script pattern |
 | Real metrics | `absent` | Only if the client supplies true figures. **Never invent them** — Rule 1 |
 | OG / social share image | `absent` | Not created |
@@ -46,7 +46,7 @@ You maintain and build the marketing website for **West Point Europe BV**, a B2B
 | Payments | `absent` | Tier 2 |
 | Infrastructure as code | `absent` | Not adopted — no Terraform in this framework |
 
-**Director:** Vibe Coder Agent · **Tier:** 0 (zero-build static) · **Engaged subagents:** [[ui_specialist]], [[web_deploy_specialist]], plus [[frontend_engineer]] for any non-trivial slice.
+**Director:** Vibe Coder Agent · **Tier:** 0 (zero-build static) · **Engaged subagents:** [[ui-specialist]], [[web-deploy-specialist]], plus [[frontend-engineer]] for any non-trivial slice.
 
 ---
 
