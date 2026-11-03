@@ -20,31 +20,34 @@ You maintain and build the marketing website for **West Point Europe BV**, a B2B
 |---|---|---|
 | Single-page site (`index.html`) | `included` | No build step, no framework |
 | Header / sticky nav | `included` | Frosts on scroll; mobile hamburger + slide-in drawer |
-| Hero + two CTAs | `included` | Navy gradient background |
-| Stats strip | `included` | 4 confirmed facts only — see Rule 1 |
-| Why West Point (3 pillars) | `included` | Reliability, Global Reach, Speed to Market |
-| Mission / values band | `included` | Navy full-width, 4 values |
+| Hero + two CTAs | `included` | Navy gradient background; no eyebrow label (generic-defaults check, 2026-11-03) |
+| Confirmed facts ledger | `included` | 4 confirmed facts only (Rule 1), a ruled row on the hero's base edge since 2026-11-03 (was a separate big-number band) |
+| Why West Point (3 pillars) | `included` | Reliability, Global Reach, Speed to Market — ruled list beside the intro, no numbered icon cards |
+| Mission / values band | `included` | Navy full-width, statement left, 4 values as a ruled list right |
 | Global Presence (4 offices) | `included` | Eindhoven HQ, Hangzhou, Bucharest, Düsseldorf |
 | Footer | `included` | Logo, nav repeat, contact, office list |
 | Responsive layout | `included` | Breakpoints at 900 px and 640 px; test at 375 and 680 per Rule 5 |
 | Scroll reveal | `included` | IntersectionObserver |
 | Logo + favicon set | `included` | 16/32/48/180/256; 16/32/180 wired into `<head>` |
-| Brand tokens in `:root` | `included` | Official client palette — see Design Spec |
+| Brand tokens in `:root` | `included` | Official client palette — see Design Spec. Every derived tint is a token too; `web_audit` 0 errors (only the `theme-color` meta literal remains) |
+| Browser surfaces | `included` | Selection, caret, scrollbar, accent colour and focus ring themed from the palette; tabular numerals for phone numbers |
 | GitHub Pages preview deploy | `included` | Default `.github.io` URL. The intended current state — see Rule 3 |
-| Services list | `available` | 6 cards are **generic placeholders** — needs the client's real service offering |
-| Contact form | `available` | Renders and validates, but only opens a `mailto:` draft. Not real lead capture. **No pending / success / error state** — submit jumps straight to `mailto:` with no feedback, `required` relies on native browser bubbles, and no `aria-describedby` links an error to its field. Fails the four-states check in [[ui-specialist]]; a real success state is a product decision, not a UI fix |
+| Services list | `available` | 6 services as a two-column ruled list (no glyph icons). Copy is still **generic placeholder** — needs the client's real service offering |
+| Contact form | `included` | `mailto:` hand-off with all states (Marius 2026-11-03): inline field errors linked by `aria-describedby`, pending button, a "your email is ready to send" status with a fallback address, "write another" reset. Fields are URL-encoded (an `&` in the company used to cut the body). Still not lead capture — see the backend row |
 | Contact form backend | `absent` | Client deferred 2026-09-17 ("leave it for the moment"). Options: Formspree, or the wedding site's Apps Script pattern |
 | Real metrics | `absent` | Only if the client supplies true figures. **Never invent them** — Rule 1 |
 | OG / social share image | `absent` | Not created |
 | Custom domain | `absent` | `westpointeurope.com` not connected — gated on client approval |
 | SFTP production deploy | `absent` | Credentials in `.env` (gitignored), **never used**. Confirm target directory and get explicit go-ahead first — could overwrite whatever is live |
 | Dark theme | `absent` | Not requested. Visual checks shoot light only |
-| Automated tests | `absent` | Tier 0 — Playwright Python behaviour tests are possible; none written yet |
+| Automated tests | `included` | `tools/test_contact_form.py`: 6 Playwright behaviour tests (form states, mailto content, mobile menu + Escape). Run `python -I tools/test_contact_form.py` |
 | Build tooling / bundler | `removed` | Deliberate — Rule 2. Restoring it is a Tier-1 decision, see [[web-tier-upgrade]] |
 | Backend / database | `absent` | Tier 2 — needs Docker and paid hosting |
 | Accounts / auth | `absent` | Tier 2 |
 | Payments | `absent` | Tier 2 |
 | Infrastructure as code | `absent` | Not adopted — no Terraform in this framework |
+
+Surface modes: `index.html` = Persuade (B2B lead generation: bold but precise, familiar patterns for the form).
 
 **Director:** Vibe Coder Agent · **Tier:** 0 (zero-build static) · **Engaged subagents:** [[ui-specialist]], [[web-deploy-specialist]], plus [[frontend-engineer]] for any non-trivial slice.
 
@@ -59,12 +62,11 @@ Single file PWA style site (`index.html`), no build step, no framework — same 
 | Section ID | Name | What it does |
 |---|---|---|
 | (nav) | Header | Sticky nav, frosts on scroll, logo + wordmark, links to About/Services/Global Presence/Contact |
-| `#top` | Hero | Navy gradient background, headline, two CTAs (Get in Touch, Our Services) |
-| (stats) | Stats strip | 4 confirmed facts only: 5+ years in business, 4 offices, B2B focus, EU+APAC corridor. No fabricated numbers. |
-| `#about` | Why West Point | 3 pillar cards: Reliability, Global Reach, Speed to Market |
-| `#services` | Services | 6 generic B2B electronics distribution service cards — placeholder copy, needs real service list from client |
+| `#top` | Hero | Navy gradient background, headline, two CTAs (Get in touch, Our services), then the confirmed-facts ledger: 5+ years, 4 offices, B2B focus, EU+APAC corridor. No fabricated numbers. |
+| `#about` | Why West Point | Intro left, 3 ruled pillars right: Reliability, Global reach, Speed to market |
+| `#services` | Services | 6 generic B2B electronics services as a two-column ruled list — placeholder copy, needs real service list from client |
 | (mission) | Mission/Values | Navy full width band, mission statement + 4 values (Reliability, Partnership, Integrity, Speed) |
-| `#offices` | Global Presence | 4 office cards: Eindhoven (HQ), Hangzhou, Bucharest, Düsseldorf |
+| `#offices` | Global Presence | 4 offices on top rules (teal rule = HQ): Eindhoven, Hangzhou, Bucharest, Düsseldorf |
 | `#contact` | Contact | Form (name/company/email/message) + direct contact block (Andrei Babcinetzki, COO) |
 | Footer | — | Logo, nav links repeat, contact, office list, copyright |
 
@@ -91,6 +93,7 @@ No backend. Submit is intercepted and opens a `mailto:` draft to `andrei@westpoi
 | File | Purpose |
 |---|---|
 | `index.html` | The entire site — HTML, CSS, JS, all in one file |
+| `tools/test_contact_form.py` | Behaviour tests for the contact form and mobile menu |
 | `knowledge-base/brand-spec.md` | Single source of truth for all brand facts, colors, content status, and design references |
 | `images/logo-icon.png` | Real logo mark (background removed, cropped) — used in nav, footer, favicon source |
 | `images/favicon-*.png` | 16/32/48/180/256px favicon set; 16/32/180 wired into `<head>` |
@@ -108,7 +111,7 @@ See `knowledge-base/brand-spec.md` for the full color table, content status, and
 |---|---|---|
 | `--navy` | `#283D4E` | Official brand navy — wordmark, headings, hero/mission backgrounds |
 | `--navy-dk` | `#1B2B37` | Darkest gradient stop, footer background |
-| `--teal` | `#005D63` | Official brand teal — CTA buttons, eyebrow labels, icons |
+| `--teal` | `#005D63` | Official brand teal — CTA buttons, office roles, HQ rule, links, focus ring |
 | `--steel` | `#6C8792` | Secondary tone extracted from logo pixels — compass ring, hero gradient |
 | `--sand` | `#DFDACF` | Pale logo accent — decorative dividers only |
 | `--ink` | `#1A2530` | Body text |
