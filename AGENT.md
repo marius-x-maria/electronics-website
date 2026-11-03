@@ -1,3 +1,9 @@
+---
+name: AGENT
+description: Agent briefing for electronics-website - role, capability registry, sections, rules and design spec for the West Point Europe BV marketing site
+tags: [electronics-website, agent, briefing]
+---
+
 # Agent Briefing — West Point Europe Website
 
 Read this file at the start of every session. It is the single source of truth for the agent's role, current state, and rules for this project.
